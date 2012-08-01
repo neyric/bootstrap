@@ -1,5 +1,6 @@
 BOOTSTRAP = ./docs/assets/css/bootstrap.css
 BOOTSTRAP_LESS = ./less/bootstrap.less
+BOOTSTRAP_LESS_NORESET = ./less/bootstrap-noreset.less
 BOOTSTRAP_RESPONSIVE = ./docs/assets/css/bootstrap-responsive.css
 BOOTSTRAP_RESPONSIVE_LESS = ./less/responsive.less
 DATE=$(shell date +%I:%M%p)
@@ -69,6 +70,11 @@ bootstrap:
 	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > bootstrap/js/copyright.js
 	cat bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js > bootstrap/js/bootstrap.min.js
 	rm bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js
+
+noreset:   
+	mkdir -p bootstrap/css
+	recess --compile ${BOOTSTRAP_LESS_NORESET} > bootstrap/css/bootstrap-noreset.css
+	recess --compress ${BOOTSTRAP_LESS_NORESET} > bootstrap/css/bootstrap-noreset.min.css
 
 #
 # MAKE FOR GH-PAGES 4 FAT & MDO ONLY (O_O  )
